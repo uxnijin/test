@@ -100,9 +100,7 @@
                     <div class="flex flex-wrap gap-4" id="social-links"></div>
                 </div>
                 <!-- Contact Form -->
-                <form id="contact-form" class="w-full flex flex-col gap-4 load-fade-up" action="https://formspree.io/f/xgvogeay" method="POST" onsubmit="handleSubmit(event)">
-                    <input type="hidden" name="_subject" value="New message from Nijin Portfolio">
-                    <input type="hidden" name="_template" value="table"> <!-- Optional: Formats email as a table -->
+                <form id="contact-form" class="w-full flex flex-col gap-4 load-fade-up" onsubmit="handleSubmit(event)">
                     <div class="flex flex-col gap-2">
                         <label class="text-black/75 dark:text-gray-300 text-sm md:text-base font-medium font-['Inter']">Name</label>
                         <div class="w-full px-4 py-3 bg-transparent border border-black/10 dark:border-gray-600 rounded-xl shadow-sm focus-within:border-black/25 dark:focus-within:border-white/25">
@@ -220,7 +218,7 @@
                 }
 
                 try {
-                    const response = await fetch('hhttps://formspree.io/f/xgvogeay', { // Replace with your Formspree endpoint
+                    const response = await fetch('https://formspree.io/f/xgvogeay', { // Replace with your Formspree endpoint
                         method: 'POST',
                         headers: {
                             'Accept': 'application/json',
@@ -230,7 +228,9 @@
 
                     console.log('Formspree Response:', response);
                     if (response.ok) {
-                        window.location.href = 'success.html'; // Redirect to success page
+                        // Hide the form and show the success message
+                        document.getElementById('contact-form').style.display = 'none';
+                        document.getElementById('success-message').style.display = 'flex';
                     } else {
                         alert('There was an error submitting your message. Please try again.');
                     }
