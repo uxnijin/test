@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Contact Nijin, a UI/UX Designer, to say hello or discuss projects.">
+    <title>Nijin - Say Hello</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles/common.css">
+    <style>
+        /* Staggered delays for page content */
+        header.load-fade-up { animation-delay: 0s; }
+        #contact-title.load-fade-up { animation-delay: 0.2s; }
+        #contact-content.load-fade-up { animation-delay: 0.4s; }
+        #contact-form.load-fade-up { animation-delay: 0.6s; }
+    </style>
+</head>
+<body class="bg-white dark:bg-black">
+    <div class="w-full p-4 sm:p-4 md:p-6 lg:p-7 xl:p-9 min-h-screen flex flex-col justify-between items-center overflow-hidden">
+        <!-- Header -->
+        <header class="w-full pt-4 pb-4 flex justify-between items-center load-fade-up">
+            <a href="index.html" class="text-black dark:text-white text-sm md:text-base font-medium font-['Inter']" id="bio-name"></a>
+            <div class="text-black dark:text-white text-sm md:text-base font-medium font-['Inter']">Say Hello</div>
+            <button id="menu-toggle" class="rounded-lg text-black dark:text-white text-sm md:text-base font-medium font-['Inter'] hover:bg-black/5 dark:hover:bg-white/10 hover:scale-105 transition duration-200 px-1.5 py-1 md:px-3 md:py-1">
+                menu
+            </button>
+        </header>
+
+        <!-- Contact Section -->
+        <main class="w-full max-w-[638px] flex-grow flex flex-col justify-start items-start gap-8 py-12">
+            <div class="w-full flex flex-col gap-8">
+                <h1 class="text-black/75 dark:text-gray-300 text-base md:text-lg font-medium font-['Inter'] load-fade-up" id="contact-title">Let’s Chat</h1>
+                <div class="flex flex-col gap-4 load-fade-up" id="contact-content">
+                    <p class="text-black/75 dark:text-gray-300 text-sm md:text-base font-medium font-['Inter']">
+                        Got a project in mind or just want to say hi? Drop me a line at <a href="" id="email-link" class="underline hover:text-black dark:hover:text-white transition duration-200"></a>.
+                    </p>
+                    <p class="text-black/75 dark:text-gray-300 text-sm md:text-base font-medium font-['Inter']">
+                        Or find me on:
+                    </p>
+                    <div class="flex flex-wrap gap-4" id="social-links"></div>
+                </div>
+                <!-- Contact Form -->
+                <form id="contact-form" class="w-full flex flex-col gap-4 load-fade-up" action="https://formspree.io/f/xgvogeay" method="POST" onsubmit="handleSubmit(event)">
+                    <input type="hidden" name="_subject" value="New message from Nijin Portfolio">
+                    <input type="hidden" name="_template" value="table"> <!-- Optional: Formats email as a table -->
+                    <div class="flex flex-col gap-2">
+                        <label class="text-black/75 dark:text-gray-300 text-sm md:text-base font-medium font-['Inter']">Name</label>
+                        <div class="w-full px-4 py-3 bg-transparent border border-black/10 dark:border-gray-600 rounded-xl shadow-sm focus-within:border-black/25 dark:focus-within:border-white/25">
+                            <input type="text" name="name" id="name" placeholder="Enter your name" class="w-full bg-transparent text-black/75 dark:text-gray-300 text-base font-['Inter'] focus:outline-none" required>
+                        </div>
+                    </div>
+                    <div class="flex flex-col gap-2">
+                        <label class="text-black/75 dark:text-gray-300 text-sm md:text-base font-medium font-['Inter']">Email</label>
+                        <div class="w-full px-4 py-3 bg-transparent border border-black/10 dark:border-gray-600 rounded-xl shadow-sm focus-within:border-black/25 dark:focus-within:border-white/25">
+                            <input type="email" name="email" id="email" placeholder="Enter your email" class="w-full bg-transparent text-black/75 dark:text-gray-300 text-base font-['Inter'] focus:outline-none" required>
+                        </div>
+                    </div>
+                    <div class="flex flex-col gap-2">
+                        <label class="text-black/75 dark:text-gray-300 text-sm md:text-base font-medium font-['Inter']">Message</label>
+                        <div class="w-full px-4 py-3 bg-transparent border border-black/10 dark:border-gray-600 rounded-xl shadow-sm focus-within:border-black/25 dark:focus-within:border-white/25">
+                            <textarea name="message" id="message" placeholder="What you want to say" class="w-full h-24 bg-transparent text-black/75 dark:text-gray-300 text-base font-['Inter'] focus:outline-none resize-none" required></textarea>
+                        </div>
+                    </div>
+                    <button type="submit" class="w-full px-4 py-3 bg-black dark:bg-white text-white dark:text-black text-base font-medium font-['Inter'] rounded-xl shadow-sm hover:bg-black/90 dark:hover:bg-white/90 hover:scale-105 transition duration-200">
+                        Submit
+                    </button>
+                </form>
+            </div>
+        </main>
+
+        <!-- Menu Overlay -->
+        <div id="menu-overlay" class="bg-white dark:bg-black hidden">
+            <div class="w-full p-4 sm:p-4 md:p-6 lg:p-7 xl:p-9 min-h-screen flex flex-col justify-between items-center">
+                <div id="menu-header" class="w-full h-[33px] flex justify-between items-center bg-white dark:bg-black menu-load-fade-up">
+                    <a href="index.html" class="text-black dark:text-white text-sm md:text-base font-medium font-['Inter']" id="bio-name-overlay"></a>
+                    <button id="close-button" class="rounded-lg text-black dark:text-white text-sm md:text-base font-medium font-['Inter'] hover:bg-black/5 dark:hover:bg-white/10 hover:scale-105 transition duration-200 px-1.5 py-1 md:px-3 md:py-1">
+                        close
+                    </button>
+                </div>
+                <nav class="max-w-[638px] flex-grow flex flex-col justify-center items-center gap-2 pt-[33px]">
+                    <a href="about.html" id="menu-link-1" class="menu-load-fade-up">
+                        <button class="hover:bg-black/5 dark:hover:bg-white/10 hover:scale-105 transition duration-200 px-3 py-1 rounded-lg justify-center items-center gap-2.5 inline-flex">
+                            <div class="text-black/75 dark:text-gray-300 text-sm md:text-base font-medium font-['Inter']">Who I Am</div>
+                        </button>
+                    </a>
+                    <a href="works.html" id="menu-link-2" class="menu-load-fade-up">
+                        <button class="hover:bg-black/5 dark:hover:bg-white/10 hover:scale-105 transition duration-200 px-3 py-1 rounded-lg justify-center items-center gap-2.5 inline-flex">
+                            <div class="text-black/75 dark:text-gray-300 text-sm md:text-base font-medium font-['Inter']">Stuff I’ve Built</div>
+                        </button>
+                    </a>
+                    <a href="experience.html" id="menu-link-3" class="menu-load-fade-up">
+                        <button class="hover:bg-black/5 dark:hover:bg-white/10 hover:scale-105 transition duration-200 px-3 py-1 rounded-lg justify-center items-center gap-2.5 inline-flex">
+                            <div class="text-black/75 dark:text-gray-300 text-sm md:text-base font-medium font-['Inter']">My Path</div>
+                        </button>
+                    </a>
+                    <a href="writings.html" id="menu-link-4" class="menu-load-fade-up">
+                        <button class="hover:bg-black/5 dark:hover:bg-white/10 hover:scale-105 transition duration-200 px-3 py-1 rounded-lg justify-center items-center gap-2.5 inline-flex">
+                            <div class="text-black/75 dark:text-gray-300 text-sm md:text-base font-medium font-['Inter']">My Thoughts</div>
+                        </button>
+                    </a>
+                    <a href="contact.html" id="menu-link-5" class="menu-load-fade-up">
+                        <button class="hover:bg-black/5 dark:hover:bg-white/10 hover:scale-105 transition duration-200 px-3 py-1 rounded-lg justify-center items-center gap-2.5 inline-flex">
+                            <div class="text-black/75 dark:text-gray-300 text-sm md:text-base font-medium font-['Inter']">Say Hello</div>
+                        </button>
+                    </a>
+                </nav>
+                <footer id="menu-footer" class="w-full pb-4 menu-load-fade-up"></footer>
+            </div>
+        </div>
+    </div>
+
+    <script src="scripts/common.js"></script>
+    <script src="data.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            try {
+                const data = portfolioData;
+                document.getElementById('bio-name').textContent = data.bio.name;
+                document.getElementById('bio-name-overlay').textContent = data.bio.name;
+                const emailLink = document.getElementById('email-link');
+                emailLink.href = data.contactEmail;
+                emailLink.textContent = data.contactEmail.replace('mailto:', '');
+
+                // Dynamically populate social links
+                const socialLinksContainer = document.getElementById('social-links');
+                data.socialLinks.forEach(link => {
+                    const linkHTML = `
+                        <a href="${link.url}" target="_blank" class="w-10 h-10 flex items-center justify-center rounded-full border border-black/25 dark:border-gray-600 text-black/75 dark:text-white hover:bg-black/10 dark:hover:bg-white/10 hover:scale-105 transition duration-200">
+                            <img src="${link.iconLight}" alt="${link.name}" height="20" width="20" class="dark:hidden">
+                            <img src="${link.iconDark}" alt="${link.name} Dark" height="20" width="20" class="hidden dark:block">
+                        </a>
+                    `;
+                    socialLinksContainer.innerHTML += linkHTML;
+                });
+            } catch (error) {
+                console.error('Error loading contact data:', error);
+            }
+
+            // Handle form submission (optional for Formspree, but added for feedback)
+            const handleSubmit = (event) => {
+                event.preventDefault();
+                console.log('Form submission prevented');
+                const name = document.getElementById('name').value;
+                const email = document.getElementById('email').value;
+                const message = document.getElementById('message').value;
+
+                // Optional: Add client-side validation
+                if (!name || !email || !message) {
+                    alert('Please fill in all fields.');
+                    return;
+                }
+
+                // Formspree handles the submission via the action attribute, but we can show feedback
+                fetch('https://formspree.io/f/xgvogeay', { // Replace with your Formspree endpoint
+                    method: 'POST',
+                    headers: {
+                        'Accept': 'application/json',
+                    },
+                    body: new FormData(document.getElementById('contact-form'))
+                })
+                .then(response => {
+                    console.log('Formspree Response:', response);
+                    if (response.ok) {
+                        alert('Thank you for your message! I’ll get back to you soon.');
+                        document.getElementById('contact-form').reset(); // Clear the form
+                    } else {
+                        alert('There was an error submitting your message. Please try again.');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error submitting form:', error);
+                    alert('There was an error submitting your message. Please try again. Check the console for details.');
+                });
+            };
+        });
+    </script>
+</body>
+</html>

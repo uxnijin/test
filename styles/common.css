@@ -1,0 +1,61 @@
+/* styles/common.css - Shared styles for Nijin's portfolio website */
+
+#menu-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1000;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    overflow-y: auto;
+}
+
+/* Fade Up animation for page content */
+.load-fade-up {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeUp 0.6s ease-out forwards;
+}
+
+/* Faster Fade Up animation for menu overlay */
+.menu-load-fade-up {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeUpMenu 0.35s ease-out forwards;
+}
+
+/* Animation keyframes for page content */
+@keyframes fadeUp {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Animation keyframes for menu (can reuse fadeUp if identical) */
+@keyframes fadeUpMenu {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Staggered delays for menu overlay */
+#menu-header.menu-load-fade-up { animation-delay: 0s; }
+#menu-link-1.menu-load-fade-up { animation-delay: 0.1s; }
+#menu-link-2.menu-load-fade-up { animation-delay: 0.2s; }
+#menu-link-3.menu-load-fade-up { animation-delay: 0.3s; }
+#menu-link-4.menu-load-fade-up { animation-delay: 0.4s; }
+#menu-link-5.menu-load-fade-up { animation-delay: 0.5s; }
+#menu-footer.menu-load-fade-up { animation-delay: 0.6s; }

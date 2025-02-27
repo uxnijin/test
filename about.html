@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="About Nijin, a UI/UX Designer passionate about creating functional and beautiful designs.">
+    <title>Nijin - About</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles/common.css">
+    <style>
+        #about-featured {
+            width: 100%;
+            max-width: 638px;
+            max-height: 398px;
+            object-fit: cover;
+            border-radius: 0.75rem;
+        }
+        /* Staggered delays for page content */
+        header.load-fade-up { animation-delay: 0s; }
+        #about-featured.load-fade-up { animation-delay: 0.2s; }
+        #about-description.load-fade-up { animation-delay: 0.4s; }
+        #about-qmark-title.load-fade-up { animation-delay: 0.6s; }
+        #about-qmark-content.load-fade-up { animation-delay: 0.8s; }
+    </style>
+</head>
+<body class="bg-white dark:bg-black">
+    <div class="w-full p-4 sm:p-4 md:p-6 lg:p-7 xl:p-9 min-h-screen flex flex-col justify-between items-center overflow-hidden">
+        <!-- Header -->
+        <header class="w-full pt-4 pb-4 flex justify-between items-center load-fade-up">
+            <a href="index.html" class="text-black dark:text-white text-sm md:text-base font-medium font-['Inter']" id="bio-name"></a>
+            <div class="text-black dark:text-white text-sm md:text-base font-medium font-['Inter']">Who I Am</div>
+            <button id="menu-toggle" class="rounded-lg text-black dark:text-white text-sm md:text-base font-medium font-['Inter'] hover:bg-black/5 dark:hover:bg-white/10 hover:scale-105 transition duration-200 px-1.5 py-1 md:px-3 md:py-1">
+                menu
+            </button>
+        </header>
+
+        <!-- About Section -->
+        <main class="w-full max-w-[638px] flex-grow flex flex-col justify-start items-center gap-8 md:gap-16 py-12 overflow-y-auto">
+            <img id="about-featured" alt="About featured image" class="load-fade-up">
+            <div class="w-full flex flex-col gap-8">
+                <p class="text-black/75 dark:text-gray-300 text-sm md:text-base font-normal font-['Inter'] leading-7 md:leading-[36px] load-fade-up" id="about-description"></p>
+                <div class="flex flex-col gap-4">
+                    <h2 class="text-black/75 dark:text-gray-300 text-sm md:text-base font-semibold font-['Inter'] leading-7 md:leading-[36px] load-fade-up" id="about-qmark-title"></h2>
+                    <p class="text-black/75 dark:text-gray-300 text-sm md:text-base font-normal font-['Inter'] leading-7 md:leading-[36px] load-fade-up" id="about-qmark-content"></p>
+                </div>
+            </div>
+        </main>
+
+        <!-- Menu Overlay -->
+        <div id="menu-overlay" class="bg-white dark:bg-black hidden">
+            <div class="w-full p-4 sm:p-4 md:p-6 lg:p-7 xl:p-9 min-h-screen flex flex-col justify-between items-center">
+                <div id="menu-header" class="w-full h-[33px] flex justify-between items-center bg-white dark:bg-black menu-load-fade-up">
+                    <a href="index.html" class="text-black dark:text-white text-sm md:text-base font-medium font-['Inter']" id="bio-name-overlay"></a>
+                    <button id="close-button" class="rounded-lg text-black dark:text-white text-sm md:text-base font-medium font-['Inter'] hover:bg-black/5 dark:hover:bg-white/10 hover:scale-105 transition duration-200 px-1.5 py-1 md:px-3 md:py-1">
+                        close
+                    </button>
+                </div>
+                <nav class="max-w-[638px] flex-grow flex flex-col justify-center items-center gap-2 pt-[33px]">
+                    <a href="about.html" id="menu-link-1" class="menu-load-fade-up">
+                        <button class="hover:bg-black/5 dark:hover:bg-white/10 hover:scale-105 transition duration-200 px-3 py-1 rounded-lg justify-center items-center gap-2.5 inline-flex">
+                            <div class="text-black/75 dark:text-gray-300 text-sm md:text-base font-medium font-['Inter']">Who I Am</div>
+                        </button>
+                    </a>
+                    <a href="works.html" id="menu-link-2" class="menu-load-fade-up">
+                        <button class="hover:bg-black/5 dark:hover:bg-white/10 hover:scale-105 transition duration-200 px-3 py-1 rounded-lg justify-center items-center gap-2.5 inline-flex">
+                            <div class="text-black/75 dark:text-gray-300 text-sm md:text-base font-medium font-['Inter']">Stuff I’ve Built</div>
+                        </button>
+                    </a>
+                    <a href="experience.html" id="menu-link-3" class="menu-load-fade-up">
+                        <button class="hover:bg-black/5 dark:hover:bg-white/10 hover:scale-105 transition duration-200 px-3 py-1 rounded-lg justify-center items-center gap-2.5 inline-flex">
+                            <div class="text-black/75 dark:text-gray-300 text-sm md:text-base font-medium font-['Inter']">My Path</div>
+                        </button>
+                    </a>
+                    <a href="writings.html" id="menu-link-4" class="menu-load-fade-up">
+                        <button class="hover:bg-black/5 dark:hover:bg-white/10 hover:scale-105 transition duration-200 px-3 py-1 rounded-lg justify-center items-center gap-2.5 inline-flex">
+                            <div class="text-black/75 dark:text-gray-300 text-sm md:text-base font-medium font-['Inter']">My Thoughts</div>
+                        </button>
+                    </a>
+                    <a href="contact.html" id="menu-link-5" class="menu-load-fade-up">
+                        <button class="hover:bg-black/5 dark:hover:bg-white/10 hover:scale-105 transition duration-200 px-3 py-1 rounded-lg justify-center items-center gap-2.5 inline-flex">
+                            <div class="text-black/75 dark:text-gray-300 text-sm md:text-base font-medium font-['Inter']">Say Hello</div>
+                        </button>
+                    </a>
+                </nav>
+                <footer id="menu-footer" class="w-full pb-4 menu-load-fade-up"></footer>
+            </div>
+        </div>
+    </div>
+
+    <script src="scripts/common.js"></script>
+    <script src="data.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            try {
+                const data = portfolioData;
+                document.getElementById('bio-name').textContent = data.bio.name;
+                document.getElementById('about-featured').src = data.about.featuredImage;
+                document.getElementById('about-description').innerHTML = data.about.description;
+                document.getElementById('about-qmark-title').textContent = data.about.qmark.title;
+                document.getElementById('about-qmark-content').innerHTML = data.about.qmark.content;
+                document.getElementById('contact-link').href = data.contactEmail;
+                document.getElementById('bio-name-overlay').textContent = data.bio.name;
+            } catch (error) {
+                console.error('Error loading about data:', error);
+            }
+        });
+    </script>
+</body>
+</html>

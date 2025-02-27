@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Writings by Nijin, fetched directly from Medium.">
+    <title>Nijin - Writings</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles/common.css">
+    <style>
+        /* Staggered delays for page content */
+        header.load-fade-up { animation-delay: 0s; }
+        #writings-container.load-fade-up { animation-delay: 0.2s; }
+    </style>
+</head>
+<body class="bg-white dark:bg-black">
+    <div class="w-full p-4 sm:px-2 sm:py-4 md:p-6 lg:p-7 xl:p-9 min-h-screen flex flex-col justify-between items-center overflow-hidden">
+        <!-- Header -->
+        <header class="w-full pt-4 pb-4 flex justify-between items-center load-fade-up">
+            <a href="index.html" class="text-black dark:text-white text-sm md:text-base font-medium font-['Inter']" id="bio-name">uxnijin</a>
+            <div class="text-black dark:text-white text-sm md:text-base font-medium font-['Inter']">My Thoughts</div>
+            <button id="menu-toggle" class="rounded-lg text-black dark:text-white text-sm md:text-base font-medium font-['Inter'] hover:bg-black/5 dark:hover:bg-white/10 hover:scale-105 transition duration-200 px-1.5 py-1 md:px-3 md:py-1">
+                menu
+            </button>
+        </header>
+
+        <!-- Writings Section -->
+        <main class="w-full flex-grow flex flex-col justify-start items-center gap-8 py-12">
+            <div class="w-full max-w-[638px] flex flex-col gap-4 md:gap-4 load-fade-up" id="writings-container"></div>
+        </main>
+
+        <!-- Footer (Empty) -->
+        <footer class="w-full pb-4"></footer>
+
+        <!-- Menu Overlay -->
+        <div id="menu-overlay" class="bg-white dark:bg-black hidden">
+            <div class="w-full p-4 sm:p-4 md:p-6 lg:p-7 xl:p-9 min-h-screen flex flex-col justify-between items-center">
+                <div id="menu-header" class="w-full h-[33px] flex justify-between items-center bg-white dark:bg-black menu-load-fade-up">
+                    <a href="index.html" class="text-black dark:text-white text-sm md:text-base font-medium font-['Inter']" id="bio-name-overlay">uxnijin</a>
+                    <button id="close-button" class="rounded-lg text-black dark:text-white text-sm md:text-base font-medium font-['Inter'] hover:bg-black/5 dark:hover:bg-white/10 hover:scale-105 transition duration-200 px-1.5 py-1 md:px-3 md:py-1">
+                        close
+                    </button>
+                </div>
+                <nav class="max-w-[638px] flex-grow flex flex-col justify-center items-center gap-2 pt-[33px]">
+                    <a href="about.html" id="menu-link-1" class="menu-load-fade-up">
+                        <button class="hover:bg-black/5 dark:hover:bg-white/10 hover:scale-105 transition duration-200 px-3 py-1 rounded-lg justify-center items-center gap-2.5 inline-flex">
+                            <div class="text-black/75 dark:text-gray-300 text-sm md:text-base font-medium font-['Inter']">Who I Am</div>
+                        </button>
+                    </a>
+                    <a href="works.html" id="menu-link-2" class="menu-load-fade-up">
+                        <button class="hover:bg-black/5 dark:hover:bg-white/10 hover:scale-105 transition duration-200 px-3 py-1 rounded-lg justify-center items-center gap-2.5 inline-flex">
+                            <div class="text-black/75 dark:text-gray-300 text-sm md:text-base font-medium font-['Inter']">Stuff I’ve Built</div>
+                        </button>
+                    </a>
+                    <a href="experience.html" id="menu-link-3" class="menu-load-fade-up">
+                        <button class="hover:bg-black/5 dark:hover:bg-white/10 hover:scale-105 transition duration-200 px-3 py-1 rounded-lg justify-center items-center gap-2.5 inline-flex">
+                            <div class="text-black/75 dark:text-gray-300 text-sm md:text-base font-medium font-['Inter']">My Path</div>
+                        </button>
+                    </a>
+                    <a href="writings.html" id="menu-link-4" class="menu-load-fade-up">
+                        <button class="hover:bg-black/5 dark:hover:bg-white/10 hover:scale-105 transition duration-200 px-3 py-1 rounded-lg justify-center items-center gap-2.5 inline-flex">
+                            <div class="text-black/75 dark:text-gray-300 text-sm md:text-base font-medium font-['Inter']">My Thoughts</div>
+                        </button>
+                    </a>
+                    <a href="contact.html" id="menu-link-5" class="menu-load-fade-up">
+                        <button class="hover:bg-black/5 dark:hover:bg-white/10 hover:scale-105 transition duration-200 px-3 py-1 rounded-lg justify-center items-center gap-2.5 inline-flex">
+                            <div class="text-black/75 dark:text-gray-300 text-sm md:text-base font-medium font-['Inter']">Say Hello</div>
+                        </button>
+                    </a>
+                </nav>
+                <footer id="menu-footer" class="w-full pb-4 menu-load-fade-up"></footer>
+            </div>
+        </div>
+    </div>
+
+    <script src="scripts/common.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            try {
+                // Fetch Medium posts via RSS feed
+                const response = await fetch('https://api.rss2json.com/v1/api.json?rss_url=https://medium.com/feed/@nijinmuhammed');
+                const data = await response.json();
+                console.log(data); // Debug: Check the structure of data.items
+
+                const writingsContainer = document.getElementById('writings-container');
+                writingsContainer.innerHTML = ''; // Clear existing content
+
+                // Process each Medium post
+                data.items.forEach(item => {
+                    // Extract snippet (100 chars for desktop, 50 chars for mobile)
+                    const desktopSnippet = item.content.replace(/<[^>]*>/g, '').substring(0, 100) + '...';
+                    const mobileSnippet = item.content.replace(/<[^>]*>/g, '').substring(0, 50) + '...';
+                    // Format date
+                    const pubDate = new Date(item.pubDate).toLocaleDateString('en-US', { day: 'numeric', month: 'short', year: 'numeric' });
+
+                    // Get thumbnail: extract from content:encoded if no thumbnail is provided
+                    let thumbnail = 'assets/writings.png'; // Default fallback
+                    // Try to extract the first image URL from content:encoded
+                    const imgMatch = item.content.match(/<img[^>]+src=["'](.*?)["']/i) || item.content.match(/<figure[^>]*><img[^>]+src=["'](.*?)["']/i);
+                    if (imgMatch && imgMatch[1]) {
+                        thumbnail = imgMatch[1]; // Use the first image src found in content:encoded
+                    }
+
+                    // Replace the cardHTML in the forEach loop of writings.html
+                    const cardHTML = `
+                        <a href="${item.link}" target="_blank" class="block w-full md:w-auto">
+                            <div class="flex flex-col sm:flex-row-reverse gap-2 hover:bg-black/5 dark:hover:bg-white/10 hover:scale-[1.02] transition duration-200 rounded-xl p-3 min-h-[100px] sm:min-h-[120px]">
+                                <div class="relative w-[120px] h-[68px] sm:w-[160px] sm:h-[90px] bg-gray-100 dark:bg-gray-800 rounded-xl overflow-hidden shrink-0">
+                                    <img src="${thumbnail}" alt="${item.title} thumbnail" class="w-full h-full object-cover">
+                                </div>
+                                <div class="flex flex-col flex-1 gap-1 sm:gap-2">
+                                    <h3 class="text-black/75 dark:text-gray-300 text-sm sm:text-base md:text-lg font-semibold font-['Inter'] leading-tight line-clamp-2">
+                                        ${item.title}
+                                    </h3>
+                                    <p class="text-black/40 dark:text-white/50 text-xs sm:text-xs md:text-sm font-medium font-['Inter'] line-clamp-2 sm:line-clamp-2">
+                                        <span class="sm:hidden">${mobileSnippet}</span>
+                                        <span class="hidden sm:inline">${desktopSnippet}</span>
+                                    </p>
+                                    <span class="text-black/50 dark:text-white/75 text-xs sm:text-xs md:text-sm font-medium font-['Inter']">
+                                        ${pubDate}
+                                    </span>
+                                </div>
+                            </div>
+                        </a>
+                    `;
+                    writingsContainer.innerHTML += cardHTML;
+                });
+            } catch (error) {
+                console.error('Error fetching Medium posts:', error);
+                document.getElementById('writings-container').innerHTML = '<p class="text-black/75 dark:text-gray-300">Failed to load writings. Please try again later.</p>';
+            }
+        });
+    </script>
+</body>
+</html>
