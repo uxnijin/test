@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Form</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="flex items-center justify-center min-h-screen bg-gray-100">
+
+    <div id="form-container" class="w-[638px] p-6 bg-white rounded-lg shadow-md">
+        <form id="contact-form" action="https://docs.google.com/forms/d/e/1FAIpQLSdXo6hG3eDnvYpr1PR4QdxojOStOeRGOQB7tLMQCXEtFWcQHA/formResponse" method="POST">
+            <!-- Name Field -->
+            <div class="mb-4">
+                <label class="block text-sm font-medium text-gray-700">Name</label>
+                <input type="text" name="entry.1901385788" placeholder="Enter your name" required
+                    class="w-full p-3 border border-gray-300 rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-black">
+            </div>
+
+            <!-- Email Field -->
+            <div class="mb-4">
+                <label class="block text-sm font-medium text-gray-700">Email</label>
+                <input type="email" name="entry.103601465" placeholder="Enter your email" required
+                    class="w-full p-3 border border-gray-300 rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-black">
+            </div>
+
+            <!-- Message Field -->
+            <div class="mb-4">
+                <label class="block text-sm font-medium text-gray-700">Message</label>
+                <textarea name="entry.75164446" placeholder="What you want to say" rows="4" required
+                    class="w-full p-3 border border-gray-300 rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-black"></textarea>
+            </div>
+
+            <!-- Submit Button -->
+            <button type="submit" class="w-36 px-6 py-3 bg-black text-white rounded-xl shadow-md hover:bg-gray-800">
+                Submit
+            </button>
+        </form>
+    </div>
+
+    <!-- Thank You Message (Initially Hidden) -->
+    <div id="thank-you-message" class="hidden w-[638px] h-[94px] flex flex-col items-center gap-6">
+        <p class="text-lg font-medium text-gray-700 text-center">Thank you for your response</p>
+        <button onclick="window.location.href='/'"
+            class="w-36 px-6 py-3 bg-black text-white rounded-xl shadow-md hover:bg-gray-800">
+            Back to home
+        </button>
+    </div>
+
+    <script>
+        document.getElementById("contact-form").addEventListener("submit", function (event) {
+            event.preventDefault(); // Prevent default form submission
+
+            const form = event.target;
+            const formData = new FormData(form);
+
+            // Submit form data to Google Forms
+            fetch(form.action, {
+                method: "POST",
+                body: formData,
+                mode: "no-cors"
+            }).then(() => {
+                // Hide form and show the thank-you message
+                document.getElementById("form-container").classList.add("hidden");
+                document.getElementById("thank-you-message").classList.remove("hidden");
+            }).catch(error => console.error("Form submission error:", error));
+        });
+    </script>
+
+</body>
+</html>

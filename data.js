@@ -54,7 +54,8 @@ const portfolioData = {
         { name: "Instagram", url: "https://www.instagram.com/uxnijin/", iconLight: "assets/instagram.svg", iconDark: "assets/instagram-dark.svg" },
         { name: "Medium", url: "https://medium.com/@nijinmuhammed", iconLight: "assets/medium.svg", iconDark: "assets/medium-dark.svg" },
         { name: "Threads", url: "https://www.threads.net/@uxnijin", iconLight: "assets/threads.svg", iconDark: "assets/threads-dark.svg" },
-        { name: "X", url: "https://x.com/MuhammedNijin", iconLight: "assets/x.svg", iconDark: "assets/x-dark.svg" }
+        { name: "X", url: "https://x.com/MuhammedNijin", iconLight: "assets/x.svg", iconDark: "assets/x-dark.svg" },
+        { name: "Gumroad", url: "https://uxnijin.gumroad.com/?_gl=1*btxr5y*_ga*MTg0MzQyOTE4LjE3NDA5OTc4Mzc.*_ga_6LJN6D94N6*MTc0MTA5Nzg0Mi42LjEuMTc0MTA5NzkwNi4wLjAuMA..", iconLight: "assets/gumroad.svg", iconDark: "assets/gumroad-dark.svg" }
     ]
 };
 
